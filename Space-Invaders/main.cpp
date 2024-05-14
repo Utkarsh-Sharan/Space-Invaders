@@ -45,6 +45,25 @@ int main()
         triangle.setFillColor(Color::Blue);
         window->draw(triangle);
 
+        //rendering image and text
+        Texture outscalTexture;
+        outscalTexture.loadFromFile("assets/textures/outscal_logo.png");
+        Sprite outscalSprite;
+        outscalSprite.setTexture(outscalTexture);
+
+        outscalSprite.setPosition(500, 350);
+        outscalSprite.setRotation(45);
+        outscalSprite.setScale(0.4, 0.4);
+
+        window->draw(outscalSprite);
+
+        //now the text
+        Font font;
+        font.loadFromFile("assets/fonts/DS_DIGIB.TTF");
+        Text text("SFML is awesome.", font, 30);
+        text.setFillColor(Color::White);
+        window->draw(text);
+
         window->display();      //displaying objects on the window
     }
 

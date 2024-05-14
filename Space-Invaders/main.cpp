@@ -48,7 +48,6 @@ int main()
         //rendering image and text
         Texture outscalTexture;
         outscalTexture.loadFromFile("assets/textures/outscal_logo.png");
-
         Sprite outscalSprite;
         outscalSprite.setTexture(outscalTexture);
 

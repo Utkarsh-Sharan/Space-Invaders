@@ -52,7 +52,7 @@ int main()
         Sprite outscalSprite;
         outscalSprite.setTexture(outscalTexture);
 
-        outscalSprite.setPosition(200, 350);
+        outscalSprite.setPosition(500, 350);
         outscalSprite.setRotation(45);
         outscalSprite.setScale(0.4, 0.4);
 

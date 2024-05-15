@@ -25,6 +25,11 @@ public:
         _playerScore = newScore;
     }
 
+    int GetMovementSpeed()
+    {
+        return _movementSpeed;
+    }
+
     Vector2f GetPosition()
     {
         return _position;
@@ -35,9 +40,9 @@ public:
 
     }
 
-    void Movement()
+    void Movement(float offset)
     {
-
+        _position.x += offset;
     }
 
     void ShootBullets()
@@ -74,11 +79,11 @@ int main()
         //handling player movement here
         if (Keyboard::isKeyPressed(Keyboard::Left))
         {
-            player.Movement();
+            player.Movement(-1.0f * player.GetMovementSpeed());
         }
         else if (Keyboard::isKeyPressed(Keyboard::Right))
         {
-            player.Movement();
+            player.Movement(1.0f * player.GetMovementSpeed());
         }
 
         window->clear(Color::Blue); //clearing the window with color blue

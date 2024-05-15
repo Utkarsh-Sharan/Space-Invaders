@@ -1,9 +1,10 @@
 #include<iostream>
 #include<SFML/Graphics.hpp>
+#include "GameService.h"
 
 using namespace sf;
 
-class Player
+/*class Player
 {
 private:
     int _health = 3;
@@ -49,10 +50,10 @@ public:
     {
 
     }
-};
+};*/
 
 int main()
-{
+{/*
     //defining dimensions of video mode
     VideoMode videoMode = *(new VideoMode(800, 600));
 
@@ -92,6 +93,15 @@ int main()
 
         window->draw(player.playerSprite);
         window->display();      //displaying objects on the window
+    }*/
+
+    GameService gameService;
+    gameService.Ignite();
+
+    while (gameService.IsRunning())
+    {
+        gameService.Update();
+        gameService.Render();
     }
 
     return 0;

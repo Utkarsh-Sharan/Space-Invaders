@@ -1,5 +1,6 @@
 #include<iostream>
 #include<SFML/Graphics.hpp>
+
 using namespace sf;
 
 class Player
@@ -11,8 +12,8 @@ private:
     Vector2f _position = Vector2f(200.0f, 100.0f);
 
 public:
-    Texture _playerTexture;
-    Sprite _playerSprite;
+    Texture playerTexture;
+    Sprite playerSprite;
 
     int GetScore()
     {
@@ -22,6 +23,11 @@ public:
     void SetScore(int newScore)
     {
         _playerScore = newScore;
+    }
+
+    Vector2f GetPosition()
+    {
+        return _position;
     }
 
     void TakeDamage()
@@ -48,6 +54,11 @@ int main()
     //rendering window of specified size
     RenderWindow* window = new RenderWindow(videoMode, "My SFML Window!");
 
+    Player player;
+
+    player.playerTexture.loadFromFile("assets/textures/player_ship.png");
+    player.playerSprite.setTexture(player.playerTexture);
+
     //Game loop to keep window open
     while(window->isOpen()) 
     {
@@ -60,10 +71,21 @@ int main()
             }
         }
 
+        //handling player movement here
+        if (Keyboard::isKeyPressed(Keyboard::Left))
+        {
+            player.Movement();
+        }
+        else if (Keyboard::isKeyPressed(Keyboard::Right))
+        {
+            player.Movement();
+        }
+
         window->clear(Color::Blue); //clearing the window with color blue
 
-        
+        player.playerSprite.setPosition(player.GetPosition());
 
+        window->draw(player.playerSprite);
         window->display();      //displaying objects on the window
     }
 

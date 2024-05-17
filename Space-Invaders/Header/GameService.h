@@ -6,7 +6,7 @@
 class GameService
 {
 private:
-
+	const int frame_rate = 60;
 	ServiceLocator* service_locator;
 	sf::RenderWindow* game_window;
 

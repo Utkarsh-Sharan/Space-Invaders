@@ -1,42 +1,58 @@
 #include "ServiceLocator.h"
+#include "GraphicService.h"
 
-ServiceLocator::ServiceLocator()
+ServiceLocator::ServiceLocator() 
 {
-	// Constructor for initializing the ServiceLocator.
+	graphic_service = nullptr; // Initialize graphic_service to null
+	createServices(); // Call createServices to instantiate services
 }
 
-ServiceLocator::~ServiceLocator()
+// Destructor: Cleans up resources by clearing all services.
+ServiceLocator::~ServiceLocator() 
 {
-	// Destructor for cleaning up resources upon object deletion.
+	clearAllServices(); // Call clearAllServices to delete any allocated services	
 }
 
-void ServiceLocator::CreateServices()
+// Creates service instances, specifically the graphic service in this case.
+void ServiceLocator::createServices() 
 {
-	// Creates instances of all services.
+	graphic_service = new GraphicService(); // Dynamically create a GraphicService instance
 }
 
-void ServiceLocator::ClearAllServices()
+// Deletes allocated services to prevent memory leaks, specifically the graphic service.
+void ServiceLocator::clearAllServices() 
 {
-	//	Deletes and deallocates memory for all services.
+	delete(graphic_service); // Delete the graphic_service instance
+	graphic_service = nullptr; // Reset pointer to null to avoid dangling pointer
 }
 
-ServiceLocator* ServiceLocator::GetInstance()
+// Returns a pointer to ServiceLocator.
+ServiceLocator* ServiceLocator::getInstance() 
 {
-	// Provides a method to access the unique ServiceLocator instance (object).
-	return nullptr;
+	static ServiceLocator instance; 
+	return &instance; // Return address of the instance
 }
 
-void ServiceLocator::Initialize()
+// Calls initialize on the graphic service, readying it for use.
+void ServiceLocator::initialize() 
 {
-	//	Initializes the ServiceLocator.
+	graphic_service->initialize(); // Initialize graphic service
 }
 
-void ServiceLocator::Update()
+// Updates the state of the graphic service.
+void ServiceLocator::update() 
 {
-	//	Updates all services.
+	graphic_service->update(); // Update graphic service
 }
 
-void ServiceLocator::Render()
+// Renders using the graphic service.
+void ServiceLocator::render() 
 {
-	//	Renders using the services.
+	graphic_service->render(); // Render graphic service
+}
+
+// Returns a pointer to the currently set graphic service.
+GraphicService* ServiceLocator::getGraphicService() 
+{ 
+	return graphic_service; 
 }

@@ -10,6 +10,7 @@ void GameService::initialize()
 void GameService::initializeVariables()
 {
 	game_window = service_locator->getGraphicService()->getGameWindow();
+	game_window->setFramerateLimit(frame_rate);
 }
 
 void GameService::destroy()

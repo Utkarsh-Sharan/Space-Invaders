@@ -95,13 +95,14 @@ int main()
         window->display();      //displaying objects on the window
     }*/
 
-    GameService gameService;
-    gameService.Ignite();
+    GameService* game_service = new GameService();
 
-    while (gameService.IsRunning())
+    game_service->ignite();
+
+    while (game_service->isRunning())
     {
-        gameService.Update();
-        gameService.Render();
+        game_service->update();
+        game_service->render();
     }
 
     return 0;

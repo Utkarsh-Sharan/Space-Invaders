@@ -57,3 +57,13 @@ bool EventService::pressedEscapeKey()
 {
 	return (game_event.key.code == sf::Keyboard::Escape);
 }
+
+bool EventService::pressedLeftKey()
+{
+	return (game_event.key.code == sf::Keyboard::Left);
+}
+
+bool EventService::pressedRightKey()
+{
+	return (game_event.key.code == sf::Keyboard::Right);
+}

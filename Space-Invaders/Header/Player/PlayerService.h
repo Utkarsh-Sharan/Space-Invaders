@@ -1,7 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Player/PlayerController.h"
+
+class PlayerController;
 
 class PlayerService
 {

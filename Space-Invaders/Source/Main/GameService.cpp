@@ -1,5 +1,5 @@
-#include "GameService.h"
-#include "GraphicService.h"
+#include "Main/GameService.h"
+#include "Graphic/GraphicService.h"
 
 void GameService::initialize()
 {

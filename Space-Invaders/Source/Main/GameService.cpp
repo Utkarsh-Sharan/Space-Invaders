@@ -6,6 +6,26 @@ namespace Main
 {
 	using namespace Global;
 
+	GameState GameService::current_state = GameState::BOOT;
+
+	GameService::GameService()
+	{
+		service_locator = nullptr; // Set service locator to null
+		game_window = nullptr; // Set game window to null
+	}
+
+	GameService::~GameService()
+	{
+		destroy(); // Clean up and release resources
+	}
+
+	// Prepares the game service for use by obtaining the service locator instance and initializing services.
+	void GameService::ignite()
+	{
+		service_locator = Global::ServiceLocator::getInstance(); // Get ServiceLocator
+		initialize(); // Initialize services.
+	}
+
 	void GameService::initialize()
 	{
 		service_locator->getInstance()->initialize();
@@ -24,24 +44,6 @@ namespace Main
 		delete(game_window);
 		service_locator = nullptr;
 		game_window = nullptr;
-	}
-
-	GameService::GameService()
-	{
-		service_locator = nullptr; // Set service locator to null
-		game_window = nullptr; // Set game window to null
-	}
-
-	GameService::~GameService()
-	{
-		destroy(); // Clean up and release resources
-	}
-
-	// Prepares the game service for use by obtaining the service locator instance and initializing services.
-	void GameService::ignite()
-	{
-		service_locator = Global::ServiceLocator::getInstance(); // Get ServiceLocator
-		initialize(); // Initialize services.
 	}
 
 	// Updates the game logic by delegating to the service locator's update method.
@@ -65,5 +67,13 @@ namespace Main
 	{
 		// Returns true if the game window is open, indicating the game is still running
 		return service_locator->getGraphicService()->isGameWindowOpen();
+	}
+	void GameService::setGameState(GameState new_state)
+	{
+		current_state = new_state;
+	}
+	GameState GameService::getGameState()
+	{
+		return current_state;
 	}
 }

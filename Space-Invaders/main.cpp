@@ -3,6 +3,7 @@
 #include "Main/GameService.h"
 
 using namespace sf;
+using namespace Main;
 
 /*class Player
 {

@@ -1,5 +1,5 @@
-#include "ServiceLocator.h"
-#include "GraphicService.h"
+#include "Global/ServiceLocator.h"
+#include "Graphic/GraphicService.h"
 
 ServiceLocator::ServiceLocator() 
 {

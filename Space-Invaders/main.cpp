@@ -1,6 +1,6 @@
 #include<iostream>
 #include<SFML/Graphics.hpp>
-#include "GameService.h"
+#include "Main/GameService.h"
 
 using namespace sf;
 

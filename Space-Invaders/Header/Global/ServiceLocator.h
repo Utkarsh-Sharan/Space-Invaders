@@ -5,34 +5,37 @@
 #include "Player/PlayerService.h"
 #include "Time/TimeService.h"
 
-class ServiceLocator
+namespace Global
 {
-private:
-    // Private Attributes:
-    GraphicService* graphic_service;
-    EventService* event_service;
-    PlayerService* player_service;
-    TimeService* time_service;
+    class ServiceLocator
+    {
+    private:
+        // Private Attributes:
+        Graphic::GraphicService* graphic_service;
+        Event::EventService* event_service;
+        Player::PlayerService* player_service;
+        Time::TimeService* time_service;
 
-    // Private Constructor and Destructor:
-    ServiceLocator();
-    // Constructor for initializing the ServiceLocator.
-    ~ServiceLocator(); 	// Destructor for cleaning up resources upon object deletion.
+        // Private Constructor and Destructor:
+        ServiceLocator();
+        // Constructor for initializing the ServiceLocator.
+        ~ServiceLocator(); 	// Destructor for cleaning up resources upon object deletion.
 
-    // Private Methods:
-    void createServices(); 			// Creates instances of all services.
-    void clearAllServices(); 		//	Deletes and deallocates memory for all services.
+        // Private Methods:
+        void createServices(); 			// Creates instances of all services.
+        void clearAllServices(); 		//	Deletes and deallocates memory for all services.
 
-public:
-    // Public Methods:
-    static ServiceLocator* getInstance(); 			// Provides a method to access the unique ServiceLocator instance (object).
-    void initialize(); 			//	Initializes the ServiceLocator.
-    void update(); 				//	Updates all services.
-    void render(); 				//	Renders using the services.
+    public:
+        // Public Methods:
+        static ServiceLocator* getInstance(); 			// Provides a method to access the unique ServiceLocator instance (object).
+        void initialize(); 			//	Initializes the ServiceLocator.
+        void update(); 				//	Updates all services.
+        void render(); 				//	Renders using the services.
 
-    // Methods to Get Specific Services: 
-    GraphicService* getGraphicService();
-    EventService* getEventService();
-    PlayerService* getPlayerService();
-    TimeService* getTimeService();
-};
+        // Methods to Get Specific Services: 
+        Graphic::GraphicService* getGraphicService();
+        Event::EventService* getEventService();
+        Player::PlayerService* getPlayerService();
+        Time::TimeService* getTimeService();
+    };
+}

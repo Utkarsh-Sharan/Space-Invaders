@@ -3,24 +3,29 @@
 #include <SFML/Graphics.hpp>
 #include "Global/ServiceLocator.h"
 
-class GameService
+namespace Main
 {
-private:
-	const int frame_rate = 60;
-	ServiceLocator* service_locator;
-	sf::RenderWindow* game_window;
+	class ServiceLocator;
 
-	void initialize();
-	void initializeVariables();// Handles game initialization.
-	void destroy();			// Handles cleanup tasks.
+	class GameService
+	{
+	private:
+		const int frame_rate = 60;
+		Global::ServiceLocator* service_locator;
+		sf::RenderWindow* game_window;
 
-public:
+		void initialize();
+		void initializeVariables();// Handles game initialization.
+		void destroy();			// Handles cleanup tasks.
 
-	GameService();			// Constructor for initializing the GameService object.
-	~GameService();	// Destructor for cleaning up resources upon object deletion.
+	public:
 
-	void ignite();			// Initiates the game.
-	void update();			// Updates the game logic and game state.
-	void render();			// Renders each frame of the game.
-	bool isRunning();		// Checks if the game is currently running.
-};
+		GameService();			// Constructor for initializing the GameService object.
+		~GameService();	// Destructor for cleaning up resources upon object deletion.
+
+		void ignite();			// Initiates the game.
+		void update();			// Updates the game logic and game state.
+		void render();			// Renders each frame of the game.
+		bool isRunning();		// Checks if the game is currently running.
+	};
+}

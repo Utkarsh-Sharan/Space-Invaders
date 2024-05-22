@@ -27,6 +27,8 @@ namespace Main
 		void initializeVariables();// Handles game initialization.
 		void destroy();			// Handles cleanup tasks.
 
+		void showMainMenu();
+
 	public:
 
 		GameService();			// Constructor for initializing the GameService object.

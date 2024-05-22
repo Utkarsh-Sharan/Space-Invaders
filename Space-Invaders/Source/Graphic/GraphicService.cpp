@@ -23,8 +23,8 @@ namespace Graphic
 	// Creates a new SFML RenderWindow object with specified video mode and title.
 	sf::RenderWindow* GraphicService::createGameWindow()
 	{
-		setVideoMode(); // Sets up the video mode for the window
-		return new sf::RenderWindow(*video_mode, game_window_title); // Creates and returns a new RenderWindow object
+		setVideoMode();
+		return new sf::RenderWindow(*video_mode, game_window_title, sf::Style::Fullscreen); //sf::Style is an Enum that defines the different possible styles for the game window.
 	}
 
 	// Sets up the video mode for the game window using specified dimensions and system's color depth.
@@ -36,8 +36,8 @@ namespace Graphic
 	// Cleans up allocated memory for video mode and game window to avoid memory leaks.
 	void GraphicService::onDestroy()
 	{
-		delete(video_mode); // Deletes the video mode object
-		delete(game_window); // Deletes the game window object
+		delete(video_mode);
+		delete(game_window);
 	}
 
 	// Placeholder function for game update logic.

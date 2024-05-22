@@ -48,6 +48,9 @@ namespace UI
 			void initialize();
 			void update();
 			void render();
+
+			void processButtonInteractions();					//take action based on the specific button that was clicked
+			bool clickedButton(sf::Sprite*, sf::Vector2f);		//checking which button was clicked
 		};
 	}
 }

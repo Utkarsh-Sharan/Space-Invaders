@@ -11,6 +11,7 @@ namespace Global
 	using namespace UI;
 	using namespace Enemy;
 	using namespace Main;
+	using namespace Gameplay;
 
 	ServiceLocator::ServiceLocator()
 	{
@@ -20,6 +21,7 @@ namespace Global
 		time_service = nullptr;
 		ui_service = nullptr;
 		enemy_service = nullptr;
+		gameplay_service = nullptr;
 
 		createServices(); // Call createServices to instantiate services
 	}
@@ -39,6 +41,7 @@ namespace Global
 		time_service = new TimeService();
 		ui_service = new UIService();
 		enemy_service = new EnemyService();
+		gameplay_service = new GameplayService();
 	}
 
 	// Deletes allocated services to prevent memory leaks, specifically the graphic service.
@@ -50,6 +53,7 @@ namespace Global
 		delete(time_service);
 		delete(ui_service);
 		delete(enemy_service);
+		delete(gameplay_service);
 
 		graphic_service = nullptr; // Reset pointer to null to avoid dangling pointer
 		event_service = nullptr;
@@ -57,6 +61,7 @@ namespace Global
 		time_service = nullptr;
 		ui_service = nullptr;
 		enemy_service = nullptr;
+		gameplay_service = nullptr;
 	}
 
 	// Returns a pointer to ServiceLocator.
@@ -75,6 +80,7 @@ namespace Global
 		time_service->initialize();
 		ui_service->initialize();
 		enemy_service->initialize();
+		gameplay_service->initialize();
 	}
 
 	// Updates the state of the graphic service.
@@ -86,6 +92,7 @@ namespace Global
 
 		if (GameService::getGameState() == GameState::GAMEPLAY)
 		{
+			gameplay_service->update();
 			player_service->update();
 			enemy_service->update();
 		}
@@ -100,6 +107,7 @@ namespace Global
 
 		if (GameService::getGameState() == GameState::GAMEPLAY)
 		{
+			gameplay_service->render();
 			player_service->render();
 			enemy_service->render();
 		}
@@ -127,12 +135,19 @@ namespace Global
 	{
 		return time_service;
 	}
+
 	UI::UIService* ServiceLocator::getUIService()
 	{
 		return ui_service;
 	}
+
 	Enemy::EnemyService* ServiceLocator::getEnemyService()
 	{
 		return enemy_service;
+	}
+
+	Gameplay::GameplayService* ServiceLocator::getGameplayService()
+	{
+		return gameplay_service;
 	}
 }

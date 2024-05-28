@@ -12,6 +12,8 @@ namespace Enemy
 		private:
 			const float movement_speed = 100.0f;
 
+			EnemyModel* enemy_model;
+
 			void move() override;
 			void moveDown();
 

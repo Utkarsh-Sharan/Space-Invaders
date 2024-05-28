@@ -6,6 +6,7 @@ namespace Enemy
 {
 	class EnemyModel;
 	class EnemyView;
+	enum class EnemyType;
 
 	class EnemyController
 	{
@@ -27,5 +28,7 @@ namespace Enemy
 		void render();
 
 		sf::Vector2f getEnemyPosition();
+
+		EnemyType getEnemyType();
 	};
 }

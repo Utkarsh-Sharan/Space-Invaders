@@ -2,6 +2,7 @@
 #include "Enemy/EnemyModel.h"
 #include "Enemy/EnemyView.h"
 #include "Global/ServiceLocator.h"
+#include "Enemy/EnemyConfig.h"
 
 namespace Enemy
 {
@@ -9,7 +10,7 @@ namespace Enemy
 
 	EnemyController::EnemyController()
 	{
-		enemy_model = new EnemyModel();
+		enemy_model = new EnemyModel(EnemyType::ZAPPER); //random for now so that it stops giving error(s)
 		enemy_view = new EnemyView();
 	}
 
@@ -36,7 +37,7 @@ namespace Enemy
 		enemy_view->render();
 	}
 
-	void EnemyController::move()
+	/*void EnemyController::move()
 	{
 		switch(enemy_model->getMovementDirection())
 		{
@@ -52,7 +53,7 @@ namespace Enemy
 			moveDown();
 			break;
 		}
-	}
+	}*/
 
 	void EnemyController::moveLeft()
 	{

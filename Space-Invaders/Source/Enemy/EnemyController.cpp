@@ -111,4 +111,9 @@ namespace Enemy
 	{
 		return enemy_model->getEnemyPosition();
 	}
+
+	EnemyType EnemyController::getEnemyType()
+	{
+		return enemy_model->getEnemyType();
+	}
 }

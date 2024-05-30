@@ -4,6 +4,8 @@
 #include "Graphic/GraphicService.h"
 #include "Event/EventService.h"
 
+#include <iostream>
+
 namespace UI
 {
 	namespace MainMenu
@@ -111,6 +113,7 @@ namespace UI
 
 			if (clickedButton(&play_button_sprite, mouse_position))
 			{
+				std::cout << "Play button pressed";
 				GameService::setGameState(GameState::GAMEPLAY);
 			}
 			else if (clickedButton(&instructions_button_sprite, mouse_position))

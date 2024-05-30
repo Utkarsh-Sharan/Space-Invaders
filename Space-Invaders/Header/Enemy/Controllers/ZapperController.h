@@ -12,15 +12,13 @@ namespace Enemy
 		private:
 			const float vertical_travel_distance = 100.0f;
 
-			EnemyModel* enemy_model;
-
 			void move() override;
 			void moveLeft();
 			void moveRight();
 			void moveDown();
 
 		public:
-			ZapperController();
+			ZapperController(EnemyType type);
 			~ZapperController();
 
 			void initialize() override;

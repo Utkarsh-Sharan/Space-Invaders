@@ -9,9 +9,9 @@ namespace Enemy
 
 	namespace Controller
 	{
-		SubZeroController::SubZeroController()
+		SubZeroController::SubZeroController(EnemyType type): EnemyController(type)
 		{
-
+			
 		}
 
 		SubZeroController::~SubZeroController()

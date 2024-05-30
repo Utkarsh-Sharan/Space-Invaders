@@ -48,7 +48,7 @@ namespace Player
 		{
 			moveLeft();
 		}
-		// we will move this to event service at a later time
+		
 		if (event_service->pressedRightKey() || event_service->pressedDKey())
 		{
 			moveRight();

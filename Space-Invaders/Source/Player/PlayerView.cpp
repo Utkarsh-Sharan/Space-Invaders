@@ -35,7 +35,11 @@ namespace Player
 
 	void PlayerView::scalePlayerSprite()
 	{
-		player_sprite.setScale(static_cast<float>(player_sprite_width) / player_sprite.getTexture()->getSize().x, static_cast<float>(player_sprite_height) / player_sprite.getTexture()->getSize().y);
+		player_sprite.setScale
+		(
+			static_cast<float>(player_sprite_width) / player_sprite.getTexture()->getSize().x,
+			static_cast<float>(player_sprite_height) / player_sprite.getTexture()->getSize().y
+		);
 	}
 
 	void PlayerView::update()

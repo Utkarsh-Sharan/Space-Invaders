@@ -29,9 +29,9 @@ namespace Graphic
 		sf::RenderWindow* createGameWindow();
 
 
-		void initialize(); //lifecycle functions
-		void update(); //..
-		void render(); //..
+		void initialize(); 
+		void update(); 
+		void render(); 
 		bool isGameWindowOpen(); //check if the window is open
 
 		sf::RenderWindow* getGameWindow(); //getter for the game window instance

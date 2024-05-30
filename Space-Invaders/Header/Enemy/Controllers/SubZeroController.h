@@ -18,7 +18,7 @@ namespace Enemy
 			void moveDown();
 
 		public:
-			SubZeroController();
+			SubZeroController(EnemyType type);
 			~SubZeroController();
 
 			void initialize() override;

@@ -24,7 +24,7 @@ namespace Player
 		const sf::Vector2f left_most_position = sf::Vector2f(50.0f, 950.0f);
 		const sf::Vector2f right_most_position = sf::Vector2f(1800.0f, 950.0f);
 
-		const float player_movement_speed = 200.0f;
+		const float player_movement_speed = 250.0f;
 
 		PlayerModel();
 		~PlayerModel();

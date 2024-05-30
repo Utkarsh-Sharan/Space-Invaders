@@ -65,7 +65,7 @@ namespace Enemy
 
 			current_position.x += enemy_model->enemy_movement_speed * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
 
-			if (current_position.x >= enemy_model->left_most_position.x)
+			if (current_position.x >= enemy_model->right_most_position.x)
 			{
 				enemy_model->setMovementDirection(MovementDirection::DOWN);
 				enemy_model->setReferencePosition(current_position);

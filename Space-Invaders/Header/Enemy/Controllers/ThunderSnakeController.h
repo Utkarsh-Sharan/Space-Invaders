@@ -6,8 +6,8 @@ namespace Enemy
 {
 	namespace Controller
 	{
-		//Zapper will move in a left-down-right (repeat) motion from top to down
-		class ZapperController : public EnemyController
+		//Thunder Snake will move downwards in a zig-zag motion
+		class ThunderSnakeController : public EnemyController
 		{
 		private:
 			const float vertical_travel_distance = 100.0f;
@@ -15,11 +15,10 @@ namespace Enemy
 			void move() override;
 			void moveLeft();
 			void moveRight();
-			void moveDown();
 
 		public:
-			ZapperController(EnemyType type);
-			~ZapperController();
+			ThunderSnakeController(EnemyType type);
+			~ThunderSnakeController();
 
 			void initialize() override;
 		};

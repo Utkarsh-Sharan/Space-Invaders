@@ -1,18 +1,19 @@
 #pragma once
 
 #include "Element/Bunker/BunkerModel.h"
-#include "SFML/Graphics.hpp"
+
+#include <SFML/Graphics.hpp>
 
 namespace Element
 {
-	class BunkerView;
-
 	namespace Bunker
 	{
+		class BunkerView;
+
 		class BunkerController
 		{
 		private:
-			Bunker::BunkerView* bunker_view;
+			BunkerView* bunker_view;
 			BunkerData bunker_data;
 
 		public:

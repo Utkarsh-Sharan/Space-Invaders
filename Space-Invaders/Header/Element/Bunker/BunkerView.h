@@ -4,8 +4,6 @@
 
 namespace Element
 {
-	
-
 	namespace Bunker
 	{
 		class BunkerController;
@@ -13,8 +11,6 @@ namespace Element
 		class BunkerView
 		{
 		private:
-			const sf::String bunker_texture_path = "assets/textures/bunker.png";
-
 			const float bunker_sprite_height = 80.0f;
 			const float bunker_sprite_width = 80.0f;
 

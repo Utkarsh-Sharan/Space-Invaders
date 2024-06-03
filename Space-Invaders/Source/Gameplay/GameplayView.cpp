@@ -1,5 +1,7 @@
 #include "Gameplay/GameplayView.h"
+
 #include "Global/ServiceLocator.h"
+#include "Global/Config.h"
 
 namespace Gameplay
 {
@@ -23,7 +25,7 @@ namespace Gameplay
 
 	void GameplayView::initializeBackgroundSprite()
 	{
-		if (background_texture.loadFromFile(background_texture_path))
+		if (background_texture.loadFromFile(Config::background_texture_path))
 		{
 			background_sprite.setTexture(background_texture);
 

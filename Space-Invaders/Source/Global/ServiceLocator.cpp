@@ -12,6 +12,7 @@ namespace Global
 	using namespace Enemy;
 	using namespace Main;
 	using namespace Gameplay;
+	using namespace Element;
 
 	ServiceLocator::ServiceLocator()
 	{
@@ -22,6 +23,7 @@ namespace Global
 		ui_service = nullptr;
 		enemy_service = nullptr;
 		gameplay_service = nullptr;
+		element_service = nullptr;
 
 		createServices(); // Call createServices to instantiate services
 	}
@@ -42,6 +44,7 @@ namespace Global
 		ui_service = new UIService();
 		enemy_service = new EnemyService();
 		gameplay_service = new GameplayService();
+		element_service = new ElementService();
 	}
 
 	// Deletes allocated services to prevent memory leaks, specifically the graphic service.
@@ -54,6 +57,7 @@ namespace Global
 		delete(ui_service);
 		delete(enemy_service);
 		delete(gameplay_service);
+		delete(element_service);
 
 		graphic_service = nullptr; // Reset pointer to null to avoid dangling pointer
 		event_service = nullptr;
@@ -62,6 +66,7 @@ namespace Global
 		ui_service = nullptr;
 		enemy_service = nullptr;
 		gameplay_service = nullptr;
+		element_service = nullptr;
 	}
 
 	// Returns a pointer to ServiceLocator.
@@ -81,6 +86,7 @@ namespace Global
 		ui_service->initialize();
 		enemy_service->initialize();
 		gameplay_service->initialize();
+		element_service->initialize();
 	}
 
 	// Updates the state of the graphic service.
@@ -95,6 +101,7 @@ namespace Global
 			gameplay_service->update();
 			player_service->update();
 			enemy_service->update();
+			element_service->update();
 		}
 
 		ui_service->update();
@@ -110,6 +117,7 @@ namespace Global
 			gameplay_service->render();
 			player_service->render();
 			enemy_service->render();
+			element_service->render();
 		}
 
 		ui_service->render();
@@ -149,5 +157,10 @@ namespace Global
 	Gameplay::GameplayService* ServiceLocator::getGameplayService()
 	{
 		return gameplay_service;
+	}
+
+	Element::ElementService* ServiceLocator::getElementService()
+	{
+		return element_service;
 	}
 }

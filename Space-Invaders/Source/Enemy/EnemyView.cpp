@@ -1,7 +1,10 @@
 #include "Enemy/EnemyView.h"
 #include "Enemy/EnemyController.h"
 #include "Enemy/EnemyConfig.h"
+
 #include "Global/ServiceLocator.h"
+#include "Global/Config.h"
+
 #include "Graphic/GraphicService.h"
 
 namespace Enemy
@@ -32,7 +35,7 @@ namespace Enemy
 		switch (type)
 		{
 		case EnemyType::SUBZERO:
-			if (enemy_texture.loadFromFile(subzero_texture_path))
+			if (enemy_texture.loadFromFile(Config::subzero_texture_path))
 			{
 				enemy_sprite.setTexture(enemy_texture);
 
@@ -41,7 +44,7 @@ namespace Enemy
 			break;
 
 		case EnemyType::ZAPPER:
-			if (enemy_texture.loadFromFile(zapper_texture_path))
+			if (enemy_texture.loadFromFile(Config::zapper_texture_path))
 			{
 				enemy_sprite.setTexture(enemy_texture);
 
@@ -50,7 +53,7 @@ namespace Enemy
 			break;
 
 		case EnemyType::THUNDER_SNAKE:
-			if (enemy_texture.loadFromFile(thunder_snake_texture_path))
+			if (enemy_texture.loadFromFile(Config::thunder_snake_texture_path))
 			{
 				enemy_sprite.setTexture(enemy_texture);
 

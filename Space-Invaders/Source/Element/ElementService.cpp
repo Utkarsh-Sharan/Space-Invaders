@@ -2,6 +2,16 @@
 
 namespace Element
 {
+	ElementService::ElementService()
+	{
+
+	}
+
+	ElementService::~ElementService()
+	{
+
+	}
+
 	void Element::ElementService::initialize()
 	{
 

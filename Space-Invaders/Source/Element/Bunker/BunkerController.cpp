@@ -17,23 +17,23 @@ namespace Element
 			bunker_view = nullptr;
 		}
 
-		void Element::Bunker::BunkerController::initialize(BunkerData data)
+		void BunkerController::initialize(BunkerData data)
 		{
 			bunker_data = data;
 			bunker_view->initialize(this);
 		}
 
-		void Element::Bunker::BunkerController::update()
+		void BunkerController::update()
 		{
 			bunker_view->update();
 		}
 
-		void Element::Bunker::BunkerController::render()
+		void BunkerController::render()
 		{
 			bunker_view->render();
 		}
 
-		sf::Vector2f Element::Bunker::BunkerController::getBunkerPosition()
+		sf::Vector2f BunkerController::getBunkerPosition()
 		{
 			return bunker_data.position;
 		}

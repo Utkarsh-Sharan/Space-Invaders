@@ -20,7 +20,7 @@ namespace Element
 			sf::Sprite bunker_sprite;
 
 			sf::RenderWindow* game_window;
-			Bunker::BunkerController* bunker_controller;
+			BunkerController* bunker_controller;
 
 			void scaleSprite();
 			void initializeImage();

@@ -1,16 +1,15 @@
 #pragma once
 
 #include "Element/Bunker/BunkerModel.h"
-#include "Element/Bunker/BunkerView.h"
 
 #include <SFML/Graphics.hpp>
 
 namespace Element
 {
-	//class BunkerView;
-
 	namespace Bunker
 	{
+		class BunkerView;
+
 		class BunkerController
 		{
 		private:

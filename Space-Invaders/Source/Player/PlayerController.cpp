@@ -4,10 +4,14 @@
 
 #include "Event/EventService.h"
 #include "Global/ServiceLocator.h"
+#include "Bullet/BulletConfig.h"
+
 #include <algorithm>
 
 namespace Player
 {
+	using namespace Bullet;
+
 	PlayerController::PlayerController()
 	{
 		player_model = new PlayerModel();
@@ -53,6 +57,17 @@ namespace Player
 		{
 			moveRight();
 		}
+
+		if (event_service->pressedLeftMouseButton())
+		{
+			fireBullet();
+		}
+	}
+
+	void PlayerController::fireBullet()
+	{
+		Global::ServiceLocator::getInstance()->getBulletService()->spawnBullet(BulletType::LASER_BULLET,
+			player_model->getPlayerPosition() - player_model->barrel_position_offset, Bullet::MovementDirection::UP);
 	}
 
 	void PlayerController::moveLeft()

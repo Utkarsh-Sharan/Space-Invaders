@@ -8,6 +8,7 @@
 #include "Enemy/EnemyService.h"
 #include "Gameplay/GameplayService.h"
 #include "Element/ElementService.h"
+#include "Bullet/BulletService.h"
 #include "Sound/SoundService.h"
 
 namespace Global
@@ -24,6 +25,7 @@ namespace Global
         Enemy::EnemyService* enemy_service;
         Gameplay::GameplayService* gameplay_service;
         Element::ElementService* element_service;
+        Bullet::BulletService* bullet_service;
         Sound::SoundService* sound_service;
 
         // Private Constructor and Destructor:
@@ -51,6 +53,7 @@ namespace Global
         Enemy::EnemyService* getEnemyService();
         Gameplay::GameplayService* getGameplayService();
         Element::ElementService* getElementService();
+        Bullet::BulletService* getBulletService();
         Sound::SoundService* getSoundService();
     };
 }

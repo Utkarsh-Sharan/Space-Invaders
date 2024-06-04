@@ -11,11 +11,14 @@ namespace Enemy
 		{
 		private:
 			const float vertical_travel_distance = 100.0f;
+			const float zapper_rate_of_fire = 2.0f;
 
 			void move() override;
 			void moveLeft();
 			void moveRight();
 			void moveDown();
+
+			void fireBullet() override;
 
 		public:
 			ZapperController(EnemyType type);

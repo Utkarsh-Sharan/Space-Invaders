@@ -12,13 +12,17 @@ namespace Enemy
 	class EnemyController
 	{
 	protected:
+		float rate_of_fire = 3.f;
+		float elapsed_fire_duration = 0.f;
+
 		EnemyModel* enemy_model;
 		EnemyView* enemy_view;
 
+		void updateFireTime();
+		void processBulletFire();
+		virtual void fireBullet() = 0;
+
 		virtual void move() = 0;
-		//void moveLeft();
-		//void moveRight();
-		//void moveDown();
 
 		sf::Vector2f getRandomInitialPosition();
 		void handleOutOfBounds();

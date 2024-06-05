@@ -30,6 +30,6 @@ namespace Powerup
 
 		PowerupController* spawnPowerup(PowerupType type, sf::Vector2f position);
 
-		void destroyPowerup(PowerupController*);
+		void destroyPowerup(PowerupController* controller);
 	};
 }

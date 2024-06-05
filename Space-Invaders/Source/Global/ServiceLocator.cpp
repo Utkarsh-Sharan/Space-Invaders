@@ -15,6 +15,7 @@ namespace Global
 	using namespace Element;
 	using namespace Bullet;
 	using namespace Sound;
+	using namespace Powerup;
 
 	ServiceLocator::ServiceLocator()
 	{
@@ -28,6 +29,7 @@ namespace Global
 		element_service = nullptr;
 		bullet_service = nullptr;
 		sound_service = nullptr;
+		powerup_service = nullptr;
 
 		createServices(); // Call createServices to instantiate services
 	}
@@ -51,6 +53,7 @@ namespace Global
 		element_service = new ElementService();
 		bullet_service = new BulletService();
 		sound_service = new SoundService();
+		powerup_service = new PowerupService();
 	}
 
 	// Deletes allocated services to prevent memory leaks, specifically the graphic service.
@@ -66,6 +69,7 @@ namespace Global
 		delete(element_service);
 		delete(bullet_service);
 		delete(sound_service);
+		delete(powerup_service);
 
 		graphic_service = nullptr; // Reset pointer to null to avoid dangling pointer
 		event_service = nullptr;
@@ -77,6 +81,7 @@ namespace Global
 		element_service = nullptr;
 		bullet_service = nullptr;
 		sound_service = nullptr;
+		powerup_service = nullptr;
 	}
 
 	// Returns a pointer to ServiceLocator.
@@ -99,6 +104,7 @@ namespace Global
 		element_service->initialize();
 		bullet_service->initialize();
 		sound_service->initialize();
+		powerup_service->initialize();
 	}
 
 	// Updates the state of the graphic service.
@@ -114,6 +120,7 @@ namespace Global
 			player_service->update();
 			enemy_service->update();
 			bullet_service->update();
+			powerup_service->update();
 			element_service->update();
 		}
 
@@ -131,6 +138,7 @@ namespace Global
 			player_service->render();
 			enemy_service->render();
 			bullet_service->render();
+			powerup_service->render();
 			element_service->render();
 		}
 
@@ -186,5 +194,10 @@ namespace Global
 	Sound::SoundService* ServiceLocator::getSoundService()
 	{
 		return sound_service;
+	}
+
+	Powerup::PowerupService* ServiceLocator::getPowerupService()
+	{
+		return powerup_service;
 	}
 }

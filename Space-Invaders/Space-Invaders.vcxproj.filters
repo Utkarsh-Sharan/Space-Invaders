@@ -293,5 +293,8 @@
     <ClInclude Include="Header\Enemy\Controllers\UFOController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header\UI\Interface\IUIController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

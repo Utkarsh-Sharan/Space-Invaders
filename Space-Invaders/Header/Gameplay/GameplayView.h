@@ -1,5 +1,7 @@
 #pragma once
 
+#include "UI/UIElement/ImageView.h"
+
 #include <SFML/Graphics.hpp>
 
 namespace Gameplay
@@ -7,13 +9,11 @@ namespace Gameplay
 	class GameplayView
 	{
 	private:
-		sf::RenderWindow* game_window;
+		UI::UIElement::ImageView* background_image;
 
-		sf::Texture background_texture;
-		sf::Sprite background_sprite;
-
-		void initializeBackgroundSprite();
-		void scaleBackgroundSprite();
+		void createUIElements();
+		void initializeImage();
+		void destroy();
 
 	public:
 		GameplayView();

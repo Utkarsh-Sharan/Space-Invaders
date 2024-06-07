@@ -1,51 +1,53 @@
 #pragma once
 
+#include "UI/Interface/IUIController.h"
+#include "UI/UIElement/ImageView.h"
+#include "UI/UIElement/ButtonView.h"
+
 #include <SFML/Graphics.hpp>
 
 namespace UI
 {
 	namespace MainMenu
 	{
-		class MainMenuUIController
+		class MainMenuUIController : public Interface::IUIController
 		{
 		private:
 			const float button_width = 400.f;
 			const float button_height = 140.f;
 
-			sf::RenderWindow* game_window;
+			const float play_button_y_position = 500.f;
+			const float instructions_button_y_position = 700.f;
+			const float quit_button_y_position = 900.f;
 
-			sf::Texture background_texture;
-			sf::Sprite background_sprite;
+			const float background_alpha = 85.f;
 
-			sf::Texture play_button_texture;
-			sf::Sprite play_button_sprite;
+			UIElement::ImageView* background_image;
 
-			sf::Texture instructions_button_texture;
-			sf::Sprite instructions_button_sprite;
+			UIElement::ButtonView* play_button;
+			UIElement::ButtonView* instructions_button;
+			UIElement::ButtonView* quit_button;
 
-			sf::Texture quit_button_texture;
-			sf::Sprite quit_button_sprite;
-
+			void createImage();
+			void createButtons();
 			void initializeBackgroundImage();
-			void scaleBackgroundImage();
-
 			void initializeButtons();
-			bool loadButtonTexturesFromFile();	//we have 3 buttons so it's better to create a seperate function to check if they are loaded
-			void setButtonSprites();
+			void registerButtonCallback();
 
-			void scaleAllButttons();
-			void scaleButton(sf::Sprite* button_to_scale);
-			void positionButtons();
+			void playButtonCallback();
+			void instructionsButtonCallback();
+			void quitButtonCallback();
+
+			void destroy();
 
 		public:
 			MainMenuUIController();
+			~MainMenuUIController();
 
-			void initialize();
-			void update();
-			void render();
-
-			void processButtonInteractions();					//take action based on the specific button that was clicked
-			bool clickedButton(sf::Sprite*, sf::Vector2f);		//checking which button was clicked
+			void initialize() override;
+			void update() override;
+			void render() override;
+			void show() override;
 		};
 	}
 }

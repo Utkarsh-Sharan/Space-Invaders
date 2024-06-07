@@ -2,6 +2,7 @@
 
 #include "Projectile/IProjectile.h"
 #include "Bullet/BulletConfig.h"
+#include "Entity/EntityConfig.h"
 
 namespace Bullet
 {
@@ -21,7 +22,7 @@ namespace Bullet
 		void handleOutOfBounds();
 
 	public:
-		BulletController(BulletType type);
+		BulletController(BulletType type, Entity::EntityType owner_type);
 		virtual ~BulletController();
 
 		void initialize(sf::Vector2f position, Bullet::MovementDirection direction) override;
@@ -30,5 +31,6 @@ namespace Bullet
 
 		sf::Vector2f getProjectilePosition() override;
 		BulletType getBulletType();
+		Entity::EntityType getOwnerEntityType();
 	};
 }

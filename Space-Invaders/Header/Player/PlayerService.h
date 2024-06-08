@@ -21,7 +21,7 @@ namespace Player
 
 		void enableShield();
 		void enableRapidFire();
-		void enableTrippleLaser();
+		void enableTripleLaser();
 
 		void reset();
 	};

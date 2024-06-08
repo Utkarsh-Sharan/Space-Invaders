@@ -71,5 +71,14 @@ namespace Player
 		void setPlayerState(PlayerState state);
 
 		Entity::EntityType getEntityType();
+
+		bool isShieldEnabled();
+		void setShieldState(bool value);
+
+		bool isRapidFireEnabled();
+		void setRapidFireState(bool value);
+
+		bool isTripleLaserEnabled();
+		void setTripleLaserState(bool value);
 	};
 }

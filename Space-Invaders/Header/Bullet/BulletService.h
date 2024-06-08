@@ -33,7 +33,7 @@ namespace Bullet
 		void update();
 		void render();
 
-		BulletController* spawnBullet(BulletType bullet_type, sf::Vector2f position, MovementDirection direction, Entity::EntityType owner_type);
+		BulletController* spawnBullet(BulletType bullet_type, Entity::EntityType owner_type, sf::Vector2f position, MovementDirection direction);
 		void destroyBullet(BulletController* bullet_controller);
 
 		void reset();

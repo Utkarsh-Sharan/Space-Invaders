@@ -3,7 +3,8 @@
 #include "Enemy/EnemyConfig.h"
 
 #include "Powerup/PowerupConfig.h"
-
+#include "Bullet/BulletController.h"
+#include "Entity/EntityConfig.h"
 #include "Global/ServiceLocator.h"
 
 namespace Enemy
@@ -12,6 +13,8 @@ namespace Enemy
 	{
 		using namespace Powerup;
 		using namespace Global;
+		using namespace Bullet;
+		using namespace Entity;
 
 		UFOController::UFOController(EnemyType type) : EnemyController(type)
 		{
@@ -89,6 +92,18 @@ namespace Enemy
 
 			int random_value = std::rand() % (static_cast<int>(Powerup::PowerupType::OUTSCAL_BOMB) + 1);
 			return static_cast<Powerup::PowerupType>(random_value);
+		}
+
+		void UFOController::onCollision(ICollider* other_collider)
+		{
+			EnemyController::onCollision(other_collider);
+			BulletController* bullet_controller = dynamic_cast<BulletController*>(other_collider);
+
+			if (bullet_controller && bullet_controller->getOwnerEntityType() != EntityType::ENEMY)
+			{
+				ServiceLocator::getInstance()->getPowerupService()->spawnPowerup(getRandomPowerupType(), enemy_model->getEnemyPosition());
+				return;
+			}
 		}
 	}
 }

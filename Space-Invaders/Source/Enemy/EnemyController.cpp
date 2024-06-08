@@ -4,12 +4,21 @@
 #include "Enemy/EnemyConfig.h"
 
 #include "Bullet/BulletConfig.h"
+#include "Bullet/BulletController.h"
 
 #include "Global/ServiceLocator.h"
+#include "Player/PlayerController.h"
+#include "Sound/SoundService.h"
+#include "Entity/EntityConfig.h"
 
 namespace Enemy
 {
 	using namespace Global;
+	using namespace Collision;
+	using namespace Entity;
+	using namespace Player;
+	using namespace Sound;
+	using namespace Bullet;
 
 	EnemyController::EnemyController(EnemyType type)
 	{
@@ -21,6 +30,9 @@ namespace Enemy
 	{
 		delete(enemy_model);
 		delete(enemy_view);
+
+		enemy_model = nullptr;
+		enemy_view = nullptr;
 	}
 
 	void EnemyController::initialize()
@@ -100,5 +112,31 @@ namespace Enemy
 	EnemyType EnemyController::getEnemyType()
 	{
 		return enemy_model->getEnemyType();
+	}
+	const sf::Sprite& EnemyController::getColliderSprite()
+	{
+		return enemy_view->getEnemySprite();
+	}
+
+	void EnemyController::onCollision(ICollider* other_collider)
+	{
+		BulletController* bullet_controller = dynamic_cast<BulletController*>(other_collider);
+		if (bullet_controller && bullet_controller->getOwnerEntityType() != EntityType::ENEMY)
+		{
+			destroy();
+			return;
+		}
+
+		PlayerController* player_controller = dynamic_cast<PlayerController*>(other_collider);
+		if (player_controller)
+		{
+			destroy();
+			return;
+		}
+	}
+
+	void EnemyController::destroy()
+	{
+		ServiceLocator::getInstance()->getEnemyService()->destroyEnemy(this);
 	}
 }

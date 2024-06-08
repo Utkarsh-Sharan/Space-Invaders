@@ -72,4 +72,8 @@ namespace Powerup
 		powerup_image = nullptr;
 	}
 
+	const sf::Sprite& PowerupView::getPowerupSprite()
+	{
+		return powerup_image->getSprite();
+	}
 }

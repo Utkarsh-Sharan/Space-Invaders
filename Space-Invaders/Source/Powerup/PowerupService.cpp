@@ -1,17 +1,21 @@
 #include "Powerup/PowerupService.h"
 #include "Powerup/PowerupController.h"
 #include "Powerup/PowerupConfig.h"
-#include "Global/ServiceLocator.h"
+
 #include "Powerup/Controllers/OutscalBombController.h"
 #include "Powerup/Controllers/RapidFireController.h"
 #include "Powerup/Controllers/ShieldController.h"
 #include "Powerup/Controllers/TripleLaserController.h"
+
+#include "Global/ServiceLocator.h"
+#include "Collision/ICollider.h"
 
 namespace Powerup
 {
 	using namespace Global;
 	using namespace Controller;
 	using namespace Collectible;
+	using namespace Collision;
 
 	PowerupService::PowerupService()
 	{
@@ -23,12 +27,6 @@ namespace Powerup
 		destroy();
 	}
 
-	void PowerupService::destroy()
-	{
-		for (int i = 0; i < powerup_list.size(); i++) 
-			delete (powerup_list[i]);
-	}
-
 	void PowerupService::initialize()
 	{
 
@@ -36,14 +34,16 @@ namespace Powerup
 
 	void PowerupService::update()
 	{
-		for (int i = 0; i < powerup_list.size(); i++) 
-			powerup_list[i]->update();
+		for (Collectible::ICollectible* powerup : powerup_list)
+			powerup->update();
+
+		destroyFlaggedPowerup();
 	}
 
 	void PowerupService::render()
 	{
-		for (int i = 0; i < powerup_list.size(); i++) 
-			powerup_list[i]->render();
+		for (Collectible::ICollectible* powerup : powerup_list)
+			powerup->render();
 	}
 
 	PowerupController* PowerupService::spawnPowerup(PowerupType type, sf::Vector2f position)
@@ -74,9 +74,25 @@ namespace Powerup
 		}
 	}
 
+	void PowerupService::destroyFlaggedPowerup()
+	{
+		for (Collectible::ICollectible* powerup : flagged_powerup_list)
+			delete (powerup);
+
+		flagged_powerup_list.clear();
+	}
+
 	void PowerupService::destroyPowerup(PowerupController* controller)
 	{
+		ServiceLocator::getInstance()->getCollisionService()->removeCollider(dynamic_cast<ICollider*>(controller));
+
+		flagged_powerup_list.push_back(controller);
 		powerup_list.erase(std::remove(powerup_list.begin(), powerup_list.end(), controller), powerup_list.end());
-		delete(controller);
+	}
+
+	void PowerupService::destroy()
+	{
+		for (Collectible::ICollectible* powerup : powerup_list)
+			delete (powerup);
 	}
 }

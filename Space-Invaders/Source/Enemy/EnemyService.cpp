@@ -8,11 +8,13 @@
 #include "Enemy/Controllers/UFOController.h"
 
 #include "Global/ServiceLocator.h"
+#include "Collision/ICollider.h"
 
 namespace Enemy
 {
 	using namespace Global;
 	using namespace Controller;
+	using namespace Collision;
 
 	EnemyService::EnemyService()
 	{
@@ -22,16 +24,6 @@ namespace Enemy
 	EnemyService::~EnemyService()
 	{
 		destroy();
-	}
-
-	void EnemyService::destroy()
-	{
-		for (int i = 0; i < enemy_list.size(); i++)
-		{
-			delete(enemy_list[i]);
-
-			enemy_list[i] = nullptr;
-		}
 	}
 
 	void EnemyService::initialize()
@@ -48,6 +40,8 @@ namespace Enemy
 		{
 			enemy_list[i]->update();
 		}
+
+		destroyFlaggedEnemies();
 	}
 
 	void EnemyService::updateSpawnTimer()
@@ -107,15 +101,39 @@ namespace Enemy
 		return static_cast<EnemyType>(randomType);  //cast int to EnemyType enum class
 	}
 
+	void EnemyService::destroy()
+	{
+		for (int i = 0; i < enemy_list.size(); i++)
+		{
+			delete(enemy_list[i]);
+
+			enemy_list[i] = nullptr;
+		}
+	}
+
 	void EnemyService::destroyEnemy(EnemyController* enemy_controller)
 	{
-		// Erase the enemy_controller object from the enemy_list vector.
-		// std::remove rearranges the elements in the vector so that all elements 
-		// that are equal to enemy_controller are moved to the end of the vector,
-		// then it returns an iterator pointing to the start of the removed elements.
-		// The erase function then removes those elements from the vector.
-		enemy_list.erase(std::remove(enemy_list.begin(), enemy_list.end(), enemy_controller), enemy_list.end());
+		for (int i = 0; i < enemy_list.size(); i++)
+		{
+			ServiceLocator::getInstance()->getCollisionService()->removeCollider(dynamic_cast<ICollider*>(enemy_list[i]));
+			delete (enemy_list[i]);
+		}
+		enemy_list.clear();
+	}
 
-		delete(enemy_controller);
+	void EnemyService::destroyFlaggedEnemies()
+	{
+		for (int i = 0; i < flagged_enemy_list.size(); i++)
+		{
+			ServiceLocator::getInstance()->getCollisionService()->removeCollider(dynamic_cast<ICollider*>(flagged_enemy_list[i]));
+			delete (flagged_enemy_list[i]);
+		}
+		flagged_enemy_list.clear();
+	}
+
+	void EnemyService::reset()
+	{
+		destroy();
+		spawn_timer = 0.0f;
 	}
 }

@@ -5,9 +5,16 @@
 
 #include "Global/ServiceLocator.h"
 
+#include "Player/PlayerController.h"
+#include "Enemy/EnemyController.h"
+#include "Element/Bunker/BunkerController.h"
+
 namespace Bullet
 {
 	using namespace Global;
+	using namespace Player;
+	using namespace Enemy;
+	using namespace Element::Bunker;
 
 	BulletController::BulletController(BulletType type, Entity::EntityType owner_type)
 	{
@@ -72,6 +79,50 @@ namespace Bullet
 		bullet_model->setBulletPosition(currentPosition);
 	}
 
+	void BulletController::onCollision(ICollider* other_collider)
+	{
+		processPlayerCollision(other_collider);
+		processEnemyCollision(other_collider);
+		processBunkerCollision(other_collider);
+		processBulletCollision(other_collider);
+	}
+
+	void BulletController::processBulletCollision(ICollider* other_collider)
+	{
+		BulletController* bullet_controller = dynamic_cast<BulletController*>(other_collider);
+
+		if (bullet_controller)
+			ServiceLocator::getInstance()->getBulletService()->destroyBullet(this);
+	}
+
+	void BulletController::processEnemyCollision(ICollider* other_collider)
+	{
+		EnemyController* enemy_controller = dynamic_cast<EnemyController*>(other_collider);
+
+		if (enemy_controller && getOwnerEntityType() != Entity::EntityType::ENEMY)
+		{
+			ServiceLocator::getInstance()->getBulletService()->destroyBullet(this);
+		}
+	}
+
+	void BulletController::processPlayerCollision(ICollider* other_collider)
+	{
+		PlayerController* player_controller = dynamic_cast<PlayerController*>(other_collider);
+
+		if (player_controller && getOwnerEntityType() != Entity::EntityType::PLAYER)
+		{
+			ServiceLocator::getInstance()->getBulletService()->destroyBullet(this);
+		}
+	}
+
+	void BulletController::processBunkerCollision(ICollider* other_collider)
+	{
+		BunkerController* bunker_controller = dynamic_cast<BunkerController*>(other_collider);
+
+		if (bunker_controller)
+			ServiceLocator::getInstance()->getBulletService()->destroyBullet(this);
+	}
+
 	void BulletController::handleOutOfBounds()
 	{
 		sf::Vector2f bullet_position = getProjectilePosition();
@@ -96,5 +147,10 @@ namespace Bullet
 	Entity::EntityType BulletController::getOwnerEntityType()
 	{
 		return bullet_model->getOwnerEntityType();
+	}
+
+	const sf::Sprite& BulletController::getColliderSprite()
+	{
+		return bullet_view->getBulletSprite();
 	}
 }

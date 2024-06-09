@@ -2,6 +2,9 @@
 
 namespace Player
 {
+	int PlayerModel::player_lives;		//forward declare
+	int PlayerModel::enemies_killed;	//forward declare
+
 	using namespace Entity;
 
 	PlayerModel::PlayerModel()
@@ -24,6 +27,9 @@ namespace Player
 		player_state = PlayerState::ALIVE;
 		player_position = initial_player_position;
 		player_score = 0;
+
+		player_lives = max_player_lives;
+		enemies_killed = 0;
 
 		b_rapid_fire = false;
 		b_shield = false;

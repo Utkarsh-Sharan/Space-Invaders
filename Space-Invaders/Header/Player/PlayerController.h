@@ -2,6 +2,7 @@
 
 #include "Collision/ICollider.h"
 #include "Powerup/PowerupConfig.h"
+#include "Player/PlayerModel.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -9,7 +10,6 @@ namespace Player
 {
 	enum class PlayerState;
 	class PlayerView;
-	class PlayerModel;
 
 	class PlayerController : public Collision::ICollider
 	{
@@ -61,6 +61,9 @@ namespace Player
 
 		sf::Vector2f getPlayerPosition();
 		PlayerState getPlayerState();
+
+		void decreasePlayerLive();
+		inline void increaseEnemiesKilled(int val) { PlayerModel::enemies_killed += val; }
 
 		const sf::Sprite& getColliderSprite() override;
 		void onCollision(ICollider* other_collider) override;

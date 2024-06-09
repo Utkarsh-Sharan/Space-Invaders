@@ -23,6 +23,8 @@ namespace Player
 		void enableRapidFire();
 		void enableTripleLaser();
 
+		void increaseEnemiesKilled(int val);
+
 		void reset();
 	};
 }

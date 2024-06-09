@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity/EntityConfig.h"
+#include "UI/GameplayUI/GameplayUIController.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -16,12 +17,21 @@ namespace Player
 	class PlayerModel
 	{
 	private:
+		friend class PlayerController;
+
+		friend void UI::GameplayUI::GameplayUIController::updateEnemiesKilledText();
+		friend void UI::GameplayUI::GameplayUIController::drawPlayerLives();
+
 		const sf::Vector2f initial_player_position = sf::Vector2f(950.0f, 950.0f);
+		const int max_player_lives = 3;
 
 		sf::Vector2f player_position;
 
 		PlayerState player_state;
 		Entity::EntityType entity_type;
+
+		static int player_lives;
+		static int enemies_killed;
 
 		int player_score;
 

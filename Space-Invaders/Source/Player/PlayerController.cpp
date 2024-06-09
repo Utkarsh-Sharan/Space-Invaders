@@ -292,6 +292,15 @@ namespace Player
 		return player_model->getPlayerState();
 	}
 
+	void PlayerController::decreasePlayerLive()
+	{
+		PlayerModel::player_lives -= 1;
+		if (PlayerModel::player_lives <= 0)
+		{
+			reset();
+		}
+	}
+
 	const sf::Sprite& PlayerController::getColliderSprite()
 	{
 		return player_view->getPlayerSprite();

@@ -8,8 +8,11 @@ namespace Main
 	enum class GameState
 	{
 		BOOT,
+		SPLASH_SCREEN,
 		MAIN_MENU,
+		INSTRUCTIONS,
 		GAMEPLAY,
+		CREDITS,
 	};
 
 	class ServiceLocator;
@@ -27,12 +30,12 @@ namespace Main
 		void initializeVariables();// Handles game initialization.
 		void destroy();			// Handles cleanup tasks.
 
-		void showMainMenu();
+		void showSplashScreen();
 
 	public:
 
 		GameService();			// Constructor for initializing the GameService object.
-		~GameService();	// Destructor for cleaning up resources upon object deletion.
+		~GameService();			// Destructor for cleaning up resources upon object deletion.
 
 		void ignite();			// Initiates the game.
 		void update();			// Updates the game logic and game state.

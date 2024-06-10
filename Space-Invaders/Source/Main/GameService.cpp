@@ -30,21 +30,19 @@ namespace Main
 	{
 		service_locator->getInstance()->initialize();
 		initializeVariables();
-		showMainMenu();
+		showSplashScreen();
+	}
+
+	void GameService::showSplashScreen()
+	{
+		setGameState(GameState::SPLASH_SCREEN);
+		Global::ServiceLocator::getInstance()->getUIService()->showScreen();
 	}
 
 	void GameService::initializeVariables()
 	{
 		game_window = service_locator->getGraphicService()->getGameWindow();
 		game_window->setFramerateLimit(frame_rate);
-	}
-
-	void GameService::destroy()
-	{
-		//delete(service_locator);
-		delete(game_window);
-		service_locator = nullptr;
-		game_window = nullptr;
 	}
 
 	// Updates the game logic by delegating to the service locator's update method.
@@ -78,8 +76,12 @@ namespace Main
 		return current_state;
 	}
 
-	void GameService::showMainMenu()
+	void GameService::destroy()
 	{
-		setGameState(GameState::MAIN_MENU);
+		//delete(service_locator);
+		delete(game_window);
+
+		service_locator = nullptr;
+		game_window = nullptr;
 	}
 }

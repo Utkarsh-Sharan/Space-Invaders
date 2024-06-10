@@ -1,8 +1,16 @@
 #include "Collision/CollisionService.h"
 #include "Collision/ICollider.h"
 
+#include "Bullet/BulletController.h"
+#include "Enemy/EnemyController.h"
+#include "Player/PlayerController.h"
+
 namespace Collision
 {
+	using namespace Enemy;
+	using namespace Player;
+	using namespace Bullet;
+
 	CollisionService::CollisionService()
 	{
 

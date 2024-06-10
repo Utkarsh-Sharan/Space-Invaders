@@ -48,15 +48,16 @@ namespace Global
 		graphic_service = new GraphicService(); // Dynamically create a GraphicService instance
 		event_service = new EventService();
 		player_service = new PlayerService();
-		time_service = new TimeService();
-		ui_service = new UIService();
+		time_service = new TimeService();	
 		enemy_service = new EnemyService();
 		gameplay_service = new GameplayService();
 		element_service = new ElementService();
 		bullet_service = new BulletService();
-		sound_service = new SoundService();
 		powerup_service = new PowerupService();
 		collision_serivce = new CollisionService();
+
+		ui_service = new UIService();
+		sound_service = new SoundService();
 	}
 
 	// Deletes allocated services to prevent memory leaks, specifically the graphic service.
@@ -65,28 +66,29 @@ namespace Global
 		delete(graphic_service); // Delete the graphic_service instance
 		delete(event_service);
 		delete(player_service);
-		delete(time_service);
-		delete(ui_service);
+		delete(time_service);	
 		delete(enemy_service);
 		delete(gameplay_service);
 		delete(element_service);
-		delete(bullet_service);
-		delete(sound_service);
+		delete(bullet_service);		
 		delete(powerup_service);
 		delete(collision_serivce);
+		delete(ui_service);
+		delete(sound_service);
 
 		graphic_service = nullptr; // Reset pointer to null to avoid dangling pointer
 		event_service = nullptr;
 		player_service = nullptr;
-		time_service = nullptr;
-		ui_service = nullptr;
+		time_service = nullptr;	
 		enemy_service = nullptr;
 		gameplay_service = nullptr;
 		element_service = nullptr;
 		bullet_service = nullptr;
-		sound_service = nullptr;
 		powerup_service = nullptr;
 		collision_serivce = nullptr;
+
+		ui_service = nullptr;
+		sound_service = nullptr;
 	}
 
 	// Returns a pointer to ServiceLocator.
@@ -103,14 +105,15 @@ namespace Global
 		event_service->initialize();
 		player_service->initialize();
 		time_service->initialize();
-		ui_service->initialize();
 		enemy_service->initialize();
 		gameplay_service->initialize();
 		element_service->initialize();
-		bullet_service->initialize();
-		sound_service->initialize();
+		bullet_service->initialize();	
 		powerup_service->initialize();
 		collision_serivce->initialize();
+
+		ui_service->initialize();
+		sound_service->initialize();
 	}
 
 	// Updates the state of the graphic service.
@@ -128,6 +131,7 @@ namespace Global
 			bullet_service->update();
 			powerup_service->update();
 			element_service->update();
+			collision_serivce->update();
 		}
 
 		ui_service->update();

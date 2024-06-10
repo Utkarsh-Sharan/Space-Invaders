@@ -54,5 +54,10 @@ namespace Element
 
 			bunker_image = nullptr;
 		}
+
+		const sf::Sprite& BunkerView::getBunkerSprite()
+		{
+			return bunker_image->getSprite();
+		}
 	}
 }

@@ -25,6 +25,7 @@ namespace Player
 	void PlayerModel::reset()
 	{
 		player_state = PlayerState::ALIVE;
+		entity_type = EntityType::PLAYER;
 		player_position = initial_player_position;
 		player_score = 0;
 

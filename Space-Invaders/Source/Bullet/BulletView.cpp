@@ -49,7 +49,7 @@ namespace Bullet
 
 	const sf::Sprite& BulletView::getBulletSprite()
 	{
-		bullet_image->getSprite();
+		return bullet_image->getSprite();
 	}
 
 	sf::String BulletView::getBulletTexturePath()

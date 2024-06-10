@@ -51,6 +51,7 @@ namespace Bullet
 		BulletController* bullet_controller = createBullet(bullet_type, owner_type);
 
 		bullet_controller->initialize(position, direction);
+		ServiceLocator::getInstance()->getCollisionService()->addCollider(dynamic_cast<ICollider*>(bullet_controller));
 		bullet_list.push_back(bullet_controller);
 
 		return bullet_controller;

@@ -51,6 +51,7 @@ namespace Powerup
 		PowerupController* powerup_controller = createPowerup(type);
 
 		powerup_controller->initialize(position);
+		ServiceLocator::getInstance()->getCollisionService()->addCollider(dynamic_cast<ICollider*>(powerup_controller));
 		powerup_list.push_back(powerup_controller);
 
 		return powerup_controller;

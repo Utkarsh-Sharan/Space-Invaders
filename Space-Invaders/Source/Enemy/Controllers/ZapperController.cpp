@@ -32,7 +32,7 @@ namespace Enemy
 
 		void ZapperController::fireBullet()
 		{
-			ServiceLocator::getInstance()->getBulletService()->spawnBullet(BulletType::LASER_BULLET, 
+			ServiceLocator::getInstance()->getBulletService()->spawnBullet(BulletType::LASER_BULLET, enemy_model->getEntityType(),
 				enemy_model->getEnemyPosition() + enemy_model->barrel_position_offset, Bullet::MovementDirection::DOWN);
 
 		}

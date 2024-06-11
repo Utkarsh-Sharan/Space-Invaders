@@ -141,9 +141,9 @@ namespace Player
 
 	void PlayerController::updateFreezeDuration()
 	{
-		if (player_model->elapsed_freeze_duration > 0)
+		if (player_model->elapsed_freeze_duration >= 0)
 		{
-			player_model->elapsed_fire_duration -= Global::ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+			player_model->elapsed_freeze_duration -= Global::ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
 
 			if (player_model->elapsed_freeze_duration <= 0)
 				player_model->setPlayerState(PlayerState::ALIVE);
@@ -239,8 +239,7 @@ namespace Player
 		{
 			if (bullet_controller->getBulletType() == BulletType::FROST_BULLET)
 			{
-				player_model->setPlayerState(PlayerState::FROZEN);
-				player_model->elapsed_freeze_duration = player_model->freeze_duration;
+				freezePlayer();
 			}
 			else
 			{
@@ -283,7 +282,8 @@ namespace Player
 
 	void PlayerController::freezePlayer()
 	{
-
+		player_model->setPlayerState(PlayerState::FROZEN);
+		player_model->elapsed_freeze_duration = player_model->freeze_duration;
 	}
 
 	sf::Vector2f PlayerController::getPlayerPosition()
@@ -302,6 +302,7 @@ namespace Player
 		if (PlayerModel::player_lives <= 0)
 		{
 			//reset();
+			player_model->setPlayerState(PlayerState::DEAD);
 			Global::ServiceLocator::getInstance()->getGameplayService()->restart();
 		}
 	}

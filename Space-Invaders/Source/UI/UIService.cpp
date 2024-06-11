@@ -49,7 +49,7 @@ namespace UI
 	{
 		switch (GameService::getGameState())
 		{
-		case GameState::BOOT:
+		case GameState::SPLASH_SCREEN:
 			return splash_screen_ui_controller;
 
 		case GameState::MAIN_MENU:

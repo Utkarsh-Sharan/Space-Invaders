@@ -16,7 +16,7 @@ namespace Player
 	private:
 		float elapsed_shield_duration;
 		float elapsed_rapid_fire_duration;
-		float elapsed_tripple_laser_duration;
+		float elapsed_triple_laser_duration;
 
 		float elapsed_fire_duration;
 		float elapsed_freez_duration;

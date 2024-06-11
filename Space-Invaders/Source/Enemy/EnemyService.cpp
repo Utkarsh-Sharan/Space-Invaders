@@ -106,10 +106,12 @@ namespace Enemy
 	{
 		for (int i = 0; i < enemy_list.size(); i++)
 		{
+			ServiceLocator::getInstance()->getCollisionService()->removeCollider(dynamic_cast<ICollider*>(enemy_list[i]));
 			delete(enemy_list[i]);
 
 			enemy_list[i] = nullptr;
 		}
+		enemy_list.clear();
 	}
 
 	void EnemyService::destroyEnemy(EnemyController* enemy_controller)

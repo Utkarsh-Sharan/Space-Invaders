@@ -13,11 +13,6 @@ namespace UI
 			ImageView::initialize(texture_path, image_width, image_height, position);
 		}
 
-		void AnimatedImageView::registerCallbackFuntion(CallbackFunction animation_end_callback)
-		{
-			callback_function = animation_end_callback;
-		}
-
 		void AnimatedImageView::update()
 		{
 			ImageView::update();
@@ -25,15 +20,15 @@ namespace UI
 			if (ui_state == UIState::VISIBLE)
 			{
 				updateElapsedDuration();
-				handleAnimationProgress();
 				updateAnimation();
+				handleAnimationProgress();
 			}
 		}
 
 		void AnimatedImageView::updateElapsedDuration()		//returns the seconds that have passed since the clock started.
 		{
 			float delta_time = clock.restart().asSeconds();
-			elapsed_duration = delta_time;
+			elapsed_duration += delta_time;
 		}
 
 		void AnimatedImageView::handleAnimationProgress()
@@ -57,24 +52,7 @@ namespace UI
 				break;
 			}
 		}
-
-		void AnimatedImageView::fadeIn()
-		{
-			float alpha = std::min(1.0f, elapsed_duration / animation_duration);
-			image_sprite.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(alpha * 255)));	//go from 0 to 1
-		}
-
-		void AnimatedImageView::fadeOut()
-		{
-			float alpha = std::max(0.0f, 1.0f - (elapsed_duration / animation_duration));
-			image_sprite.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(alpha * 255)));	//go from 1 to 0
-		}
-
-		void AnimatedImageView::render()
-		{
-			ImageView::render();
-		}
-
+		
 		void AnimatedImageView::playAnimation(AnimationType type, float duration, CallbackFunction animation_end_callback)
 		{
 			ImageView::show();
@@ -94,12 +72,34 @@ namespace UI
 			animation_type = type;
 		}
 
+		void AnimatedImageView::registerCallbackFuntion(CallbackFunction animation_end_callback)
+		{
+			callback_function = animation_end_callback;
+		}
+
 		void AnimatedImageView::reset()
 		{
 			animation_duration = default_animation_duration;
 			animation_type = AnimationType::FADE_IN;
 			clock.restart();
 			elapsed_duration = 0.0f;
+		}
+
+		void AnimatedImageView::fadeIn()
+		{
+			float alpha = std::min(1.0f, elapsed_duration / animation_duration);
+			image_sprite.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(alpha * 255)));	//go from 0 to 1
+		}
+
+		void AnimatedImageView::fadeOut()
+		{
+			float alpha = std::max(0.0f, 1.0f - (elapsed_duration / animation_duration));
+			image_sprite.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(alpha * 255)));	//go from 1 to 0
+		}
+
+		void AnimatedImageView::render()
+		{
+			ImageView::render();
 		}
 	}
 }

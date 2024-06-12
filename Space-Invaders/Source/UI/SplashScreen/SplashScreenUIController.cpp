@@ -16,7 +16,7 @@ namespace UI
 
 		SplashScreenUIController::SplashScreenUIController()
 		{
-			outscal_logo_view = new ImageView();
+			outscal_logo_view = new AnimatedImageView();
 		}
 
 		SplashScreenUIController::~SplashScreenUIController()
@@ -49,22 +49,18 @@ namespace UI
 
 		void SplashScreenUIController::update()
 		{
-			updateTimer();
-			showMainMenu();
+			outscal_logo_view->update();
 		}
 
-		void SplashScreenUIController::updateTimer()
+		void SplashScreenUIController::fadeInAnimationCallback()
 		{
-			elapsed_duration += Global::ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+			outscal_logo_view->playAnimation(AnimationType::FADE_OUT, splash_screen_duration, std::bind(&SplashScreenUIController::fadeOutAnimationCallback, this));
 		}
 
-		void SplashScreenUIController::showMainMenu()
+		void SplashScreenUIController::fadeOutAnimationCallback()
 		{
-			if (elapsed_duration >= splash_screen_duration)
-			{
-				Global::ServiceLocator::getInstance()->getSoundService()->playBackgroundMusic();
-				GameService::setGameState(GameState::MAIN_MENU);
-			}
+			Global::ServiceLocator::getInstance()->getSoundService()->playBackgroundMusic();
+			GameService::setGameState(GameState::MAIN_MENU);
 		}
 
 		void SplashScreenUIController::render()
@@ -74,7 +70,7 @@ namespace UI
 
 		void SplashScreenUIController::show()
 		{
-
+			outscal_logo_view->playAnimation(AnimationType::FADE_IN, splash_screen_duration, std::bind(&SplashScreenUIController::fadeInAnimationCallback, this));
 		}
 	}
 }
